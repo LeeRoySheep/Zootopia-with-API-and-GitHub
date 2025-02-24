@@ -1,6 +1,6 @@
 # Animal types website generator alias Zootopia
-This Program fetches animal data from a website or json file chosen by the user.    
-It creates a new website with the information.
+This Program fetches animal data from the [Ninja Server](https://api-ninjas.com/) chosen by the user.    
+It creates a new website with the chosen animal and skin type information.
 ## Installation guide
 Install the requirements in requirements with ___pip3 install requirements.txt___    
 ## Usage
