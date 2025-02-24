@@ -1,16 +1,6 @@
 from data_fetcher import fetch_data
 
 
-def load_data(data_path):
-    """
-    function to read json file at :param
-    :param data_path:
-    :return:
-    """
-    with open(data_path, 'r', encoding="utf8") as handle:
-        return json.load(handle)
-
-
 def serialize_animal(animal_obj):
     """
     function to create serialized html as string from animal obj
@@ -140,17 +130,24 @@ def main():
     """
     chosen_animal = input('Please select an animal: ')
     animals = fetch_data(chosen_animal)
-    skin_types = get_skin_types(animals)
-    skin_choice = get_skin_choice(
+    if len(animals) > 0:
+        skin_types = get_skin_types(animals)
+        skin_choice = get_skin_choice(
                                     f"Please select one of the "
                                     + f"following skyn types:\n{set(skin_types.values())}"
                                     ,skin_types
                                     )
-    animals_left = get_by_skin(skin_choice,skin_types)
-    text_input = create_data_string(animals,animals_left)
-    replace_text = '__REPLACE_ANIMALS_INFO__'
-    html_template = html_reader('animals_template.html').replace(replace_text,text_input)
-    html_writer('animals.html',html_template)
+        animals_left = get_by_skin(skin_choice,skin_types)
+        text_input = create_data_string(animals,animals_left)
+        replace_text = '__REPLACE_ANIMALS_INFO__'
+        html_template = html_reader('animals_template.html').replace(replace_text,text_input)
+        html_writer('animals.html',html_template)
+    else:
+        text_input = f'<h2>The animal {chosen_animal} doesn\'t exist.</h2>'
+        replace_text = '__REPLACE_ANIMALS_INFO__'
+        html_template = html_reader('animals_template.html').replace(replace_text, text_input)
+        html_writer('animals.html', html_template)
+
 
 
 if __name__ == '__main__':

@@ -26,5 +26,4 @@ def fetch_data(animal_name):
         }
     },
     """
-
     return requests.get(ANIMALS_URL+animal_name,HEADERS).json()
